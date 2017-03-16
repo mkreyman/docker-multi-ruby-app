@@ -1,18 +1,5 @@
-FROM ruby:2.2.2
+FROM sherbet/base-ruby-2.2.2
 MAINTAINER Mark Kreyman <mark@kreyman.com>
-
-RUN apt-get update -qq && \
-    apt-get install -qq -y --no-install-recommends vim \
-      autoconf \
-      build-essential \
-      curl \
-      libxml2-dev \
-      libxslt-dev \
-      libssl-dev \
-      openssl \
-      libmagick++-dev \
-      git && \
-    rm -rf /var/lib/apt/lists/*
 
 ENV APP_HOME /product-catalog
 RUN mkdir -p $APP_HOME

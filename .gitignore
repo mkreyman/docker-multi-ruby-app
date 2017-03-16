@@ -4,3 +4,4 @@ mysql-server/schemas/*data.sql
 *.DS_Store
 env.*
 .env*
+Gemfile*

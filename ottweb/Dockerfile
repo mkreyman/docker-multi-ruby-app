@@ -1,9 +1,5 @@
-FROM ruby:2.1.1
+FROM sherbet/base-ruby-2.1.1
 MAINTAINER Mark Kreyman <mark@kreyman.com>
-
-RUN apt-get update -qq && \
-    apt-get install -qq -y --no-install-recommends curl && \
-    rm -rf /var/lib/apt/lists/*
 
 # clone nvm/node
 ENV NODEJS_VERSION v6.9.0

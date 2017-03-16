@@ -1,18 +1,5 @@
-FROM ruby:1.9.3-p547
+FROM sherbet/base-ruby-1.9.3-p547
 MAINTAINER Mark Kreyman <mark@kreyman.com>
-
-RUN apt-get update -qq && \
-    apt-get install -qq -y --no-install-recommends vim \
-      autoconf \
-      build-essential \
-      curl \
-      libxml2-dev \
-      libxslt-dev \
-      libssl-dev \
-      openssl \
-      libmagick++-dev \
-      git && \
-    rm -rf /var/lib/apt/lists/*
 
 ENV APP_HOME /stallone
 RUN mkdir -p $APP_HOME
