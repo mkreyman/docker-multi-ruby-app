@@ -1,0 +1,81 @@
+source 'https://rubygems.org'
+
+HOSTED_ENVIRONMENTS = [:production, :staging, :dev, :qa, :beta]
+
+gem 'rails', '4.1.4'
+
+# Use unicorn as the app server
+gem 'unicorn'
+gem 'prerender_rails'
+gem 'airbrake'
+gem 'rails_serve_static_assets'
+
+# UI
+gem 'slim'
+gem 'sass-rails', '~> 4.0.3'
+gem 'bootstrap-sass'
+gem 'bourbon'
+
+# Use Uglifier as compressor for JavaScript assets
+gem 'uglifier', '>= 1.3.0'
+# Use CoffeeScript for .js.coffee assets and views
+gem 'coffee-rails', '~> 4.0.0'
+
+# Use jquery as the JavaScript library
+gem 'jquery-rails'
+
+# bundle exec rake doc:rails generates the API under doc/api.
+gem 'sdoc', '~> 0.4.0',          group: :doc
+
+# Report performance metrics to New Relic
+gem 'newrelic_rpm', group: HOSTED_ENVIRONMENTS
+
+# Session storage
+gem 'redis-rails', '~> 4.0'
+
+# I18N Support
+gem 'phraseapp-ruby'
+
+# Turn off logging of asset requests
+gem 'quiet_assets'
+
+# Oauth communication w/ UMS
+gem 'oauth'
+gem 'typhoeus'
+
+group :development, :test do
+  # Use Capistrano for deployment
+  gem 'capistrano-rails'
+  gem 'capistrano3-unicorn'
+  gem 'capistrano-bundler'
+  gem 'capistrano-rvm'
+
+  # Testing gems
+  gem 'rspec-rails', '~> 3.4', '>= 3.4.2'
+  gem 'guard-rspec', require: false
+  gem 'pry'
+  gem 'pry-doc'
+  gem 'pry-rails'
+  gem 'i18n-tasks', '~> 0.7.8'
+end
+
+group :test do
+  gem 'factory_girl_rails', '~> 4.6'
+  gem 'faker', '~> 1.6', '>= 1.6.3'
+  gem 'capybara', '~> 2.7'
+  gem 'poltergeist', '~> 1.9'
+  gem 'launchy', '~> 2.4', '>= 2.4.3'
+  gem 'selenium-webdriver', '~> 2.53'
+
+  # Code Climate
+  gem 'codeclimate-test-reporter', '~> 0.5.0', require: false
+end
+
+group :development do
+  gem 'commander'
+
+  # Better error debugging in the browser
+  gem 'better_errors', '~> 2.1', '>= 2.1.1'
+  gem 'binding_of_caller', '~> 0.7.2'
+
+end

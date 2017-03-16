@@ -1,0 +1,4 @@
+[mysqld]
+user=mysql
+log-bin=mysql-bin
+server-id=100

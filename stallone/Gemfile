@@ -1,0 +1,152 @@
+
+## leftright - causes rails runner to exec test suite rather than
+
+source 'http://rubygems.org'
+
+gem 'rails', '3.2.19'
+
+gem 'haml', '3.1.4'
+
+# Make redis-rb use hiredis C extension as default driver for speed
+gem 'hiredis', '0.4.5'
+gem 'redis', '2.2.2', :require => ['redis/connection/hiredis', 'redis', 'redis/distributed']
+gem 'redis-objects', :require => 'redis/objects'
+gem 'multi_fetch_fragments'
+# gem 'recurly'
+gem 'recurly', '2.8.0.rc1'
+gem 'avalara', :git => "https://github.com/adamfortuna/avalara"
+gem 'vertex', :git => 'git@github.com:sherbet/vertex.git', :branch => 'release/1.0.4'
+gem 'unicorn', '~> 4.8.3'
+gem 'bluepill', '0.0.60'
+gem 'aasm', '3.2.0'
+gem 'acts_as_list', '0.1.4'
+gem 'ar_mailer_rails3', '2.1.12'
+gem 'curb', '0.8.1'
+gem 'httpclient', '2.1.7.2'
+gem 'json', '1.7.7'
+gem 'libxml-ruby', '2.4.0'
+gem 'mysql2'
+gem 'money-rails', '~> 0.8.0'
+gem 'net-ssh'
+gem 'net-scp'
+gem 'net-sftp'
+gem 'oauth', '0.4.5'
+gem 'oauth-plugin', '0.4.0.pre4'
+gem 'omniauth', '>= 1.0.0'
+gem 'omniauth_crowd'
+gem 'simple_oauth', '0.2.0'
+gem 'resque', '1.20', :require => 'resque/server'
+gem 'resque-lock-timeout', '0.3.1'
+gem 'rest-client', '~> 1.7.2'
+gem 'rest-graph', '1.8.0'
+gem 'ruby-hmac', '0.4.0'
+gem 'whenever', '0.7.1', :require => false
+gem 'will_paginate', '3.0.3'
+gem 'radius-client', :git => 'git@github.com:wildchild/radius-client.git'
+gem 'uuidtools', '2.1.3'
+gem 'dynamic_form', '1.1.4'
+gem 'newrelic_rpm'
+gem 'rpm_contrib', '2.1.7'
+gem 'rake'
+gem 'rabl'
+gem 'ffi', '1.2.0'
+gem 'yajl-ruby', :require => 'yajl'
+gem 'tzip'
+gem 'addressable', :require => ['addressable/uri', 'addressable/template']
+gem 'cellophane', :git => "git@github.com:sherbet/cellophane.git", :require => 'cellophane', :branch => "convert_gem"
+gem 'redis-rails'
+gem 'phrase'
+gem 'faraday', '~> 0.9.0'
+gem 'barby', '~> 0.6.2'
+gem 'chunky_png', '~> 1.3.4'
+gem 'savon', '~> 2.2.0'
+gem 'resque-scheduler', '~> 1.9.0'
+gem 'hashie'
+
+#nagios ncsa
+gem 'send_nsca'
+gem 'jbuilder'
+
+gem 'celluloid'
+
+#JWT
+gem 'jwt'
+
+# factory girl used for development seeds, but adding it to devel caused
+# assets:precompile to fail on deployment. So I will try adding to prod as well.
+gem 'factory_girl_rails', '1.0.1'
+
+
+group :dev_cache, :int, :qa, :eqa, :stage, :beta, :production do
+  gem 'dalli', '2.7.4'
+end
+
+group :development do
+  gem 'annotate'
+  #gem 'rspec-nc'
+end
+
+group :development, :test do
+  gem 'ruby-prof'
+  gem 'rspec-mocks', '2.14.0'
+  gem 'rspec-expectations', '2.14.0'
+  gem 'rspec-rails', '2.14.0'
+  # Use debugger
+  gem 'pry'
+  gem 'pry-doc'
+  gem 'pry-rails'
+  gem 'pry-nav'
+  gem 'debugger'
+  gem 'simplecov'
+  gem 'simplecov-rcov'
+  gem 'ci_reporter_cucumber'
+  gem 'ci_reporter_rspec'
+  gem 'rubycritic', :require => false
+  gem 'capistrano-rails'
+  gem 'capistrano3-unicorn'
+  gem 'capistrano-bundler'
+  gem 'capistrano-rvm'
+  gem 'capistrano-resque', '~> 0.2.1', :require => false
+  gem 'bullet'
+end
+
+group :test do
+  gem 'cucumber'
+  gem 'gherkin'
+  gem 'cucumber-rails', :require => false
+  gem 'capybara', '1.1.2'
+  gem 'poltergeist'
+  gem 'chromedriver-helper', '0.0.4'
+  gem 'database_cleaner', '0.7.2'
+  gem 'growl', '1.0.3'
+  gem 'guard', '>=2.1.0'
+  gem 'guard-cucumber', '1.2.0'
+  gem 'guard-redis', '0.1.0'
+  gem 'guard-rspec', '1.2.1'
+  gem 'guard-spork', '1.1.0'
+  gem 'guard-test', '0.5.0'
+  gem 'json_spec', '1.0.3'
+  gem "mocha", "0.13.2", :require => false
+  gem 'pickle', :git => "git@github.com:sherbet/pickle.git", :branch => "edan-find-named-model"
+  gem 'resque_unit', '0.4.4'
+  gem 'rspec'
+  gem 'shoulda-matchers'
+  gem 'spork', '0.9.2'
+  gem 'spork-testunit', '0.0.8'
+  gem 'test-unit', '2.5.1'
+  gem 'timecop', '0.4.1'
+  gem 'webmock'
+  gem 'rb-inotify', :require => false
+  gem 'rb-fsevent', :require => false
+  gem 'rb-fchange', :require => false
+  gem 'test_after_commit'
+  gem 'vcr'
+  gem 'faker'
+  gem 'fakeredis'
+  gem 'codeclimate-test-reporter'
+end
+
+group :assets do
+  gem 'uglifier'
+  gem 'sass-rails'
+end

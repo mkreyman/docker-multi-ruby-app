@@ -1,0 +1,134 @@
+version: '2'
+services:
+  product-catalog:
+    build:
+      context: ./product-catalog
+      args:
+        github_username: $GITHUB_USERNAME
+        github_password: $GITHUB_PASSWORD
+    image: sherbet/product-catalog
+    container_name: product-catalog
+    ports:
+     - "3002:3002"
+    expose:
+     - "3002"
+    volumes:
+     - ../product-catalog/:/product-catalog/
+     - ./product-catalog/database.yml:/product-catalog/config/database.yml
+    volumes_from:
+     - bundle-product-catalog
+    depends_on:
+      - db
+      - redis
+    links:
+      - db:db
+      - redis:redis
+    env_file:
+      - .env
+  bundle-product-catalog:
+    image: sherbet/product-catalog
+    container_name: bundle-product-catalog
+    command: /bin/true
+    volumes:
+      - /bundle-product-catalog
+  stallone:
+    build:
+      context: ./stallone
+      args:
+        github_username: $GITHUB_USERNAME
+        github_password: $GITHUB_PASSWORD
+    image: sherbet/stallone
+    container_name: stallone
+    ports:
+     - "3001:3001"
+    expose:
+     - "3001"
+    volumes:
+     - ../stallone:/stallone
+     - ./stallone/database.yml:/stallone/config/database.yml
+    volumes_from:
+     - bundle-stallone
+    depends_on:
+      - db
+      - redis
+    links:
+      - db:db
+      - redis:redis
+    env_file:
+      - .env
+  bundle-stallone:
+    image: sherbet/stallone
+    container_name: bundle-stallone
+    command: /bin/true
+    volumes:
+      - /bundle-stallone
+  ottweb:
+    build:
+      context: ./ottweb
+      args:
+        github_username: $GITHUB_USERNAME
+        github_password: $GITHUB_PASSWORD
+    image: sherbet/ottweb
+    container_name: ottweb
+    ports:
+     - "3000:3000"
+    expose:
+     - "3000"
+    volumes:
+     - ../ottweb:/ottweb
+    volumes_from:
+     - bundle-ottweb
+    depends_on:
+      - db
+      - redis
+    links:
+      - redis:redis
+    env_file:
+      - .env
+  bundle-ottweb:
+    image: sherbet/ottweb
+    container_name: bundle-ottweb
+    command: /bin/true
+    volumes:
+      - /bundle-ottweb
+  db:
+    build: ./mysql-server
+    image: sherbet/mysql-server
+    container_name: mysql-server
+    restart: always
+    ports:
+     - "6306:3306"
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+    depends_on:
+      - dbstore
+    volumes_from:
+     - dbstore
+  dbstore:
+    build: ./dbstore
+    image: sherbet/dbstore
+    container_name: dbstore
+    volumes:
+     - /var/lib/mysql
+  mysql-client:
+    build: ./mysql-client
+    image: sherbet/mysql-client
+    container_name: mysql-client
+    volumes_from:
+     - dbstore
+    links:
+     - db
+     - db:mysql-server
+  redis:
+    build: ./redis
+    image: redis
+    container_name: redis
+    restart: always
+    ports:
+     - "6379:6379"
+    expose:
+     - "6379"
+    volumes:
+      - redis:/var/lib/redis/data
+volumes:
+  redis:

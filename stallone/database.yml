@@ -1,0 +1,13 @@
+development: &default
+  adapter: mysql2
+  username: root
+  password:
+  database: stallone_development
+  host: db
+
+test: &test
+  <<: *default
+  database: stallone_test
+
+cucumber:
+  <<: *test

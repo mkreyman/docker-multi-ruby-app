@@ -1,0 +1,27 @@
+FROM ruby:2.1.1
+MAINTAINER Mark Kreyman <mark@kreyman.com>
+
+RUN apt-get update -qq && \
+    apt-get install -qq -y --no-install-recommends vim \
+      autoconf \
+      build-essential \
+      curl \
+      libxml2-dev \
+      libxslt-dev \
+      libssl-dev \
+      openssl \
+      libmagick++-dev \
+      git && \
+    rm -rf /var/lib/apt/lists/*
+
+# clone nvm/node
+ENV NODEJS_VERSION v6.9.0
+ENV PATH $PATH:~/.nvm/versions/node/${NODEJS_VERSION}/bin:/bin/versions/node/${NODEJS_VERSION}/bin
+ENV NVM_NODEJS_ORG_MIRROR http://nodejs.org/dist
+
+RUN git clone https://github.com/creationix/nvm.git ~/.nvm && cd ~/.nvm && git checkout `git describe --abbrev=0 --tags`
+RUN . ~/.nvm/nvm.sh && \
+    nvm install $NODEJS_VERSION && \
+    nvm alias default $NODEJS_VERSION && \
+    npm config set registry=https://artifactory.global.dish.com/artifactory/api/npm/npm-remote && \
+    npm config set strict-ssl=false

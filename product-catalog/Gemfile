@@ -1,0 +1,90 @@
+source 'https://rubygems.org'
+
+gem 'rails', '~> 4.2.3'
+
+# Bundle edge Rails instead:
+# gem 'rails', :git => 'git://github.com/rails/rails.git'
+
+gem 'bundler', '~> 1.11.2'
+gem 'rake'
+gem 'mysql2', '0.3.16'
+gem 'friendly_id'
+gem 'jbuilder'
+gem 'activesupport-json_encoder'
+gem 'i18n-active_record',
+    :git => 'git://github.com/svenfuchs/i18n-active_record.git',
+    :require => 'i18n/active_record'
+gem 'recurly',
+    :git => "https://github.com/sherbet/recurly-client-ruby.git"
+gem "vertex",
+    :git => "git@github.com:sherbet/vertex.git",
+    :branch => 'release/1.0.4'
+gem 'curb' #required in vertex...
+gem 'savon'
+gem 'phraseapp-ruby'
+gem 'responders', '~> 2.0'
+gem 'resque', :require => 'resque/server'
+gem 'resque-scheduler'
+gem 'resque-retry'
+gem 'redis-rails'
+gem 'redis-namespace'
+gem 'rest-client'
+gem 'geocoder'
+gem 'bulk_insert'
+
+# Code Climate
+gem "codeclimate-test-reporter", group: :test, require: nil
+
+# Testing gems
+gem 'seedbank'
+
+group :development do
+  gem 'bullet'
+  gem 'rails-erd'
+end
+
+group :development, :test do
+  gem 'rspec-rails'
+  gem 'rspec-nc'
+  gem 'guard-rspec'
+  gem 'factory_girl_rails', '~> 4.0'
+  #  gem 'spring-commands-rspec'
+
+  gem 'capistrano-rails'
+  gem 'capistrano3-unicorn'
+  gem 'capistrano-bundler'
+  gem 'capistrano-rvm'
+  gem 'pry-byebug'
+  gem 'pry-doc'
+  gem 'pry-rails'
+  gem "capistrano-resque", require: false
+end
+
+group :test do
+  gem 'faker'
+  gem 'capybara'
+  gem 'launchy'
+  gem 'api_matchers'
+  gem 'shoulda-matchers', require: false
+  gem 'database_cleaner'
+  gem 'webmock', '~> 1.21.0'
+  gem 'vcr', '~> 2.9.3'
+  gem 'resque_unit'
+end
+
+# To use ActiveModel has_secure_password
+# gem 'bcrypt-ruby', '~> 3.0.0'
+
+# To use Jbuilder templates for JSON
+# gem 'jbuilder'
+
+# Use unicorn as the app server
+gem 'unicorn'
+
+# Deploy with Capistrano
+# gem 'capistrano'
+
+# To use debugger
+# gem 'debugger'
+
+gem 'newrelic_rpm'

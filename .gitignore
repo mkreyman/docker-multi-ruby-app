@@ -1,0 +1,6 @@
+tmp
+dbstore/data
+mysql-server/schemas/*data.sql
+*.DS_Store
+env.*
+.env*
