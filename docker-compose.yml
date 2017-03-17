@@ -1,5 +1,30 @@
 version: '2'
 services:
+  base:
+    build:
+      context: ./base
+    image: sherbet/base
+  ruby-1.9.3-p547:
+    build:
+      context: ./ruby
+      args:
+        ruby_major: "1.9"
+        ruby_version: "1.9.3-p547"
+    image: sherbet/ruby:1.9.3-p547
+  ruby-2.1.1:
+    build:
+      context: ./ruby
+      args:
+        ruby_major: "2.1"
+        ruby_version: "2.1.1"
+    image: sherbet/ruby:2.1.1
+  ruby-2.2.2:
+    build:
+      context: ./ruby
+      args:
+        ruby_major: "2.2"
+        ruby_version: "2.2.2"
+    image: sherbet/ruby:2.2.2
   product-catalog:
     build:
       context: ./product-catalog

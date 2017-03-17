@@ -1,4 +1,4 @@
-FROM sherbet/base-ruby-2.2.2
+FROM sherbet/ruby:2.2.2
 MAINTAINER Mark Kreyman <mark@kreyman.com>
 
 ENV APP_HOME /product-catalog

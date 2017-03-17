@@ -1,4 +1,4 @@
-FROM sherbet/base-ruby-2.1.1
+FROM sherbet/ruby:2.1.1
 MAINTAINER Mark Kreyman <mark@kreyman.com>
 
 # clone nvm/node

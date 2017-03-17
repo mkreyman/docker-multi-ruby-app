@@ -1,8 +1,8 @@
-FROM ubuntu:14.04
+FROM sherbet/base
 MAINTAINER Mark Kreyman <mark@kreyman.com>
 
-ENV RUBY_MAJOR 2.1
-ENV RUBY_VERSION 2.1.1
+ARG ruby_major
+ARG ruby_version
 
 # skip installing gem documentation
 RUN mkdir -p /usr/local/etc \
@@ -20,14 +20,11 @@ RUN set -ex \
     libgdbm-dev \
     ruby \
   ' \
-  && apt-get update -qq \
-  && apt-get install -qq -y --no-install-recommends $buildDeps \
-     autoconf build-essential libxml2-dev libxslt-dev libssl-dev \
-     libcurl4-openssl-dev libmysqlclient-dev libmagick++-dev openssl \
-     libyaml curl git unzip vim wget \
+  && apt-get update \
+  && apt-get install -y --no-install-recommends $buildDeps \
   && rm -rf /var/lib/apt/lists/* \
   \
-  && wget -O ruby.tar.gz "https://cache.ruby-lang.org/pub/ruby/${RUBY_MAJOR%-rc}/ruby-$RUBY_VERSION.tar.gz" --no-check-certificate \
+  && curl -o ruby.tar.gz "https://cache.ruby-lang.org/pub/ruby/${ruby_major%-rc}/ruby-$ruby_version.tar.gz" --insecure \
   \
   && mkdir -p /usr/src/ruby \
   && tar -xvzf ruby.tar.gz -C /usr/src/ruby --strip-components=1 \

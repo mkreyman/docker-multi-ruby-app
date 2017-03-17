@@ -1,4 +1,4 @@
-FROM sherbet/base-ruby-1.9.3-p547
+FROM sherbet/ruby:1.9.3-p547
 MAINTAINER Mark Kreyman <mark@kreyman.com>
 
 ENV APP_HOME /stallone
