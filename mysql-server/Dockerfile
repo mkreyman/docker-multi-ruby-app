@@ -10,6 +10,6 @@ RUN mkdir /schemas
 VOLUME /var/lib/mysql
 VOLUME /schemas
 
-EXPOSE 3306
+EXPOSE 6306
 
 CMD ["mysqld"]

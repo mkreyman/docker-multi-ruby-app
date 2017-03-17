@@ -1,13 +1,13 @@
 development: &default
   adapter: mysql2
   encoding: utf8
-  reconnect: false
-  database: product-catalog_development
+  reconnect: true
+  database: product_catalog_development
   pool: 5
   username: root
   password:
-  host: db
+  host: mysql-server
 
 test: &test
   <<: *default
-  database: product-catalog_test
+  database: product_catalog_test

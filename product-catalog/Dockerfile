@@ -2,6 +2,7 @@ FROM sherbet/ruby:2.2.2
 MAINTAINER Mark Kreyman <mark@kreyman.com>
 
 ENV APP_HOME /product-catalog
+ENV DOCKER_HOST product-catalog
 RUN mkdir -p $APP_HOME
 WORKDIR $APP_HOME
 VOLUME $APP_HOME
@@ -28,4 +29,5 @@ RUN gem install bundler && \
 
 # Running bundle install again to catch up on any changes in Gemfile
 CMD bundle install && \
+    rake db:drop db:create db:migrate && \
     bin/rails s -p 3002 -b 0.0.0.0

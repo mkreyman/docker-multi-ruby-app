@@ -33,6 +33,7 @@ services:
         github_password: $GITHUB_PASSWORD
     image: sherbet/product-catalog
     container_name: product-catalog
+    restart: always
     ports:
      - "3002:3002"
     expose:
@@ -47,6 +48,7 @@ services:
       - redis
     links:
       - db:db
+      - db:mysql-server
       - redis:redis
     env_file:
       - .env
@@ -64,6 +66,7 @@ services:
         github_password: $GITHUB_PASSWORD
     image: sherbet/stallone
     container_name: stallone
+    restart: always
     ports:
      - "3001:3001"
     expose:
@@ -78,6 +81,7 @@ services:
       - redis
     links:
       - db:db
+      - db:mysql-server
       - redis:redis
     env_file:
       - .env
@@ -95,6 +99,7 @@ services:
         github_password: $GITHUB_PASSWORD
     image: sherbet/ottweb
     container_name: ottweb
+    restart: always
     ports:
      - "3000:3000"
     expose:
@@ -125,6 +130,7 @@ services:
      - "6306:3306"
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_ROOT_HOST: "%"
     depends_on:
       - dbstore
     volumes_from:

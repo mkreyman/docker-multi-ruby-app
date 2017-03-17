@@ -3,7 +3,7 @@ development: &default
   username: root
   password:
   database: stallone_development
-  host: db
+  host: mysql-server
 
 test: &test
   <<: *default

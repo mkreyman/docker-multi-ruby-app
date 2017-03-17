@@ -6,13 +6,13 @@ To build:
 
 Create a Docker network, i.e. `sherbet-network`, if it hasn't been created:
 
-    $ docker network create sherbet-network
+    $ docker network create sherbet_default
 
 To run and connect to an existing container with the name `mysql-server` on that network:
 
     $ docker run -it --rm \
-        --net=sherbet-network --volumes-from mysql-server \
-        mysql-client mysql -hmysql-server -uroot
+        --net=sherbet_default --volumes-from mysql-server \
+        sherbet/mysql-client mysql -hmysql-server -uroot
 
 To run shell:
 

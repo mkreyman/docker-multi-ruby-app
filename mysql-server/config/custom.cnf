@@ -24,6 +24,7 @@ innodb_file_per_table=1
 socket=/var/lib/mysql/mysql.sock
 secure-file-priv=/var/lib/mysql-files
 user=mysql
+bind-address = 0.0.0.0
 
 # Disabling symbolic-links is recommended to prevent assorted security risks
 symbolic-links=0

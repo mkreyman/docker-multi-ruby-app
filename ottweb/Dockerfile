@@ -14,6 +14,7 @@ RUN . ~/.nvm/nvm.sh && \
     npm config set strict-ssl=false
 
 ENV APP_HOME /ottweb
+ENV DOCKER_HOST ottweb
 RUN mkdir -p $APP_HOME
 WORKDIR $APP_HOME
 VOLUME $APP_HOME
