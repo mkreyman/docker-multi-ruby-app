@@ -14,6 +14,7 @@ RUN . ~/.nvm/nvm.sh && \
     npm config set strict-ssl=false
 
 ENV APP_HOME /ottweb
+ENV RAILS_ENV development
 ENV DOCKER_HOST ottweb
 RUN mkdir -p $APP_HOME
 WORKDIR $APP_HOME
@@ -47,6 +48,7 @@ CMD bundle install && \
     npm install && \
     npm run postinstall && \
     npm run webpack && \
+    bundle exec rake phraseapp && \
     rm -f tmp/pids/server.pid && \
     bin/rails s -p 3000 -b 0.0.0.0
 

@@ -1,13 +1,5 @@
 development:
-  :cache: redis://redis:6379/0/cache
-  :resque:
-    :host: redis
-    :port: 6379
-    :namespace: pc_development
+  :sessions: redis://redis:6379/0/session
 
 test:
-  :cache: redis://redis:6379/0/cache
-  :resque:
-    :host: redis
-    :port: 6379
-    :namespace: pc_test
+  :sessions: redis://redis:6379/0/session

@@ -114,7 +114,7 @@ services:
       - db
       - redis
     links:
-      - redis:redis
+      - redis:redis.local
     env_file:
       - .env
   bundle-ottweb:
