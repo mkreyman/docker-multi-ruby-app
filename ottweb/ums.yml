@@ -1,0 +1,36 @@
+development: &defaults
+  :site: http://stallone:3001
+  :dw:
+    # consumer_key: 7OViCrS71f2jThdb6tPJET3GzyXCbmhKI4DAZuX7
+    # consumer_secret: q1OVJ4OSxvgjqSvpOQ0ETt9de5BnbEXFdtvqP1XC
+    :consumer_key: DeQFKLTWjBpnXqxGohYOwSvtOUFDPQAypwcm7G5Z
+    :consumer_secret: d19KoyZdkDnXtls2BQK4NzkJfhdvcr3RUjxfvsG4
+    :domain_guid: 42acd96f889640158fd2246e9ad5b99c
+  :bb:
+    :consumer_key: DeQFKLTWjBpnXqxGohYOwSvtOUFDPQAypwcm7G5Z
+    :consumer_secret: d19KoyZdkDnXtls2BQK4NzkJfhdvcr3RUjxfvsG4
+
+# local_remote: &local_remote
+#   :site: http://qa-api.shrbt.com
+#   :dw:
+#     :consumer_key: 7OViCrS71f2jThdb6tPJET3GzyXCbmhKI4DAZuX7
+#     :consumer_secret: q1OVJ4OSxvgjqSvpOQ0ETt9de5BnbEXFdtvqP1XC
+#     :domain_guid: bd237737067844ea8794426ad11f5d89
+#   :bb:
+#     :consumer_key: H4fyflQiB9rpXFZnpbaf2jaF1dJOWCFt2DJB3Axd
+#     :consumer_secret: Nfq2Xld6eZWV1Xis4EHAX3omdn3VXLuyat9sfjEM
+#     :domain_guid: bd237737067844ea8794426ad11f5d89
+
+local_remote: &local_remote
+  :site: http://dev-api.shrbt.com
+  :dw:
+    :consumer_key: n282mezRn5boS8VqxBgqOeoM3QYtCehdPnJKc79v
+    :consumer_secret: f1L0ZeqMWujcC34qQG7BUyQVGhXX1QTolfymbE8e
+    :domain_guid: 42acd96f889640158fd2246e9ad5b99c
+  :bb:
+    :consumer_key: H4fyflQiB9rpXFZnpbaf2jaF1dJOWCFt2DJB3Axd
+    :consumer_secret: Nfq2Xld6eZWV1Xis4EHAX3omdn3VXLuyat9sfjEM
+    :domain_guid: bd237737067844ea8794426ad11f5d89
+
+test:
+    <<: *local_remote

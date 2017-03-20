@@ -106,6 +106,8 @@ services:
      - "3000"
     volumes:
      - ../ottweb:/ottweb
+     - ./ottweb/redis.yml:/ottweb/config/constants/redis.yml
+     - ./ottweb/ums.yml:/ottweb/config/constants/ums.yml
     volumes_from:
      - bundle-ottweb
     depends_on:
