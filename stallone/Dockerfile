@@ -32,4 +32,4 @@ EXPOSE 3001
 # Running bundle install again to catch up on any changes in Gemfile
 CMD bundle install && \
     rake db:migrate && \
-    bin/rails s -p 3001 -b 0.0.0.0
+    bundle exec rails s -p 3001 -b 0.0.0.0
