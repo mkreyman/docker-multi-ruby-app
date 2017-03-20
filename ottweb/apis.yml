@@ -1,0 +1,11 @@
+development:
+  :ums: http://stallone:3001
+  :product_catalogue: http://product-catalogue:3002
+  :cms: http://cms:3004
+  :cms_s3: https://slingtv-cms-mc-content.s3.amazonaws.com/local/development
+  :consumer_key: F6wL7dsTptwsTjSg3KVvAZwnyZT7fuLA0WtSC9yd
+  :barcode_s3_url: https://s3.amazonaws.com/sling-bb-code
+  :optimizely_id: 7739571558
+  :browser_player_url: https://watch.q.sling.com
+  :kaptcha_url: https://tst.kaptcha.com
+  :microservices: https://ms.d.sling.com/sling-api

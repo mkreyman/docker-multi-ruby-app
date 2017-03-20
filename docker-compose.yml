@@ -108,6 +108,7 @@ services:
      - ../ottweb:/ottweb
      - ./ottweb/redis.yml:/ottweb/config/constants/redis.yml
      - ./ottweb/ums.yml:/ottweb/config/constants/ums.yml
+     - ./ottweb/apis.yml:/ottweb/config/constants/apis.yml
     volumes_from:
      - bundle-ottweb
     depends_on:
