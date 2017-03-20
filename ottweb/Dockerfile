@@ -40,6 +40,8 @@ RUN npm install -g redux react-redux react
 RUN gem install bundler && \
     bundle install
 
+EXPOSE 3000
+
 # Running bundle install again to catch up on any changes in Gemfile
 CMD bundle install && \
     npm install && \

@@ -27,7 +27,9 @@ ADD database.yml $APP_HOME/config/
 RUN gem install bundler && \
     bundle install
 
+EXPOSE 3001
+
 # Running bundle install again to catch up on any changes in Gemfile
 CMD bundle install && \
-    rake db:drop db:create db:migrate && \
+    rake db:migrate && \
     bin/rails s -p 3001 -b 0.0.0.0
