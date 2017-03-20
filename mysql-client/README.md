@@ -36,6 +36,11 @@ To run shell:
 
     $ docker run -v <path to sql>:/sql --link <mysql server container name>:mysql -it mysql-client -h mysql -p <password> -D <database name> -e "source /sql/<your sql file>"
 
+### List of aliases you might want to create in your ~/.bash_profile
+
+        alias dmysql='docker run -it --rm --net=sherbet-network --volumes-from mysql-server mysql-client mysql -h mysql-server'
+        alias dmysqldump='docker run -it --rm --net=sherbet-network --volumes-from mysql-server mysql-client mysqldump'
+        alias dc='docker-compose'
 
 
 ### Quick reference:

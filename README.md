@@ -12,12 +12,13 @@ https://docs.docker.com/compose/overview/
 
 ### Caching your github credentials
 
-Some gems in Gemfile get downloaded from github.com using `https` protocol. Create a new `.env` in the current directory and add the following env variables to it:
+Some gems in Gemfile get downloaded from github.com using `https` protocol. Create a new `.env` in the docker repo directory and add the following env variables to it:
 
+       COMPOSE_PROJECT_NAME=sherbet
        GITHUB_USERNAME=your_github_username
        GITHUB_PASSWORD=your_github_password
 
-The `.env` file is in the `.gitignore` file.
+The `.env` file is in the `.gitignore` file, so it won't get exposed.
 
 ### Launching apps in docker
 
@@ -29,13 +30,26 @@ The `.env` file is in the `.gitignore` file.
        $ cd ~/workspace
        $ git clone https://github.com/sherbet/docker.git
        $ cd docker
+
+You could get all the applications up, from building images to running containers, by just running the following command:
+
        $ docker-compose up
 
 The `docker-compose up` command would do the following, based on instructions in `docker-compose.yml`:
- - build images for all pieces of SlingTV application,
+ - build images for all pieces of the application,
  - create a Docker network called `sherbet_default`,
  - spin up containers based on the images,
  - link all containers together.
+
+However, if you get any errors due to latencies, etc., it would be harder to troubleshoot. So, start by building individual images instead:
+
+       $ docker-compose build redis
+       $ docker-compose build db
+       $ docker-compose build dbstore
+       $ docker-compose build base             # the base image for the following ruby images
+       $ docker-compose build ruby-1.9.3-p547  # the base image for the stallone image
+       $ docker-compose build ruby-2.1.1       # the base image for the ottweb image
+       $ docker-compose build ruby-2.2.2       # the base image for product-catalog image
 
 Building images for the first time might take 10-15 minutes. Your code in `../ottweb`, `../stallone` and `../product-catalog` is not part of the images. It's just being mounted into containers when they get created. So, no need to rebuild any image, unless their respective Dockerfile was changed. Also, unless you delete all containers with `docker-compose down`, you don't need to spin them again. Just use `docker-compose stop` and `docker-compose start` for subsequent restarts of the apps in your Docker environment. Then attach to the logs with `docker-compose logs -f`.
 
@@ -50,7 +64,7 @@ Building images for the first time might take 10-15 minutes. Your code in `../ot
 - dbstore
 - redis
 
-The `dbstore` contains the persistent database files and doesn't need to be running, just built. The `mysql-client` would soon stop as well. You only need to restart it if you would like to execute some longer running jobs on the `mysql-server`, as described in the README for `mysql-client`. You can access the `mysql-server` container directly with your favorite MySQL tool on port 6306 with user `root` and blank password. NOTE: Your changes would persist only as long as the `dbstore` container still exists. Make sure to export your changes to save them locally!
+The `dbstore` contains the persistent database files and doesn't need to be running, just built. You can access the `mysql-server` container directly with your favorite MySQL tool on port 6306 with user `root` and blank password. NOTE: Your changes to the database would persist only as long as the `dbstore`, `product-catalog` and  `stallone` containers still exist. The database gets dropped, recreated and all migrations run every time you rebuild `product-catalog` and  `stallone` containers.
 
 ### Useful commands
 
@@ -61,6 +75,9 @@ The `dbstore` contains the persistent database files and doesn't need to be runn
       $ docker-compose up
       # ...or in detached mode
       $ docker-compose up -d
+      $ docker-compose down  # this will remove all containers started with the "up" command. You might want to use the "stop" command instead.
+      $ docker-compose stop
+      $ docker-compose start
 
 #### List and delete images:
 
@@ -76,9 +93,27 @@ The `dbstore` contains the persistent database files and doesn't need to be runn
 
       $ docker exec -it <container_label> /bin/bash
 
+#### Bring up only one application and its dependencies
+
+      $ docker-compose up db
+      # then in another terminal window
+      $ docker-compose up product-catalog
+
+#### Spin a _new_ standalone container and connect to its shell (make sure the volumes you're mapping actually exist):
+
+      $ docker run -it \
+        --name product-catalog \
+        --hostname product-catalog \
+        --net=sherbet_default \
+        -p 3002:3002 \
+        -v /Users/svcdgccodev/workspace/product-catalog/:/product-catalog/ \
+        -v /Users/svcdgccodev/workspace/docker/product-catalog/database.yml:/product-catalog/config/database.yml \
+        sherbet/product-catalog \
+        /bin/bash
+
 ### List of aliases you might want to create in your ~/.bash_profile
 
-        alias cdock='cd ~/workspace/docker-slingtv'
+        alias cdock='cd ~/workspace/docker'
         alias di='docker images'
         alias dlsv='docker volume ls -f dangling=true'
         alias drmi='docker rmi -f'
@@ -89,13 +124,6 @@ The `dbstore` contains the persistent database files and doesn't need to be runn
         alias dps='docker ps -a'
         alias dcp='docker cp'
         alias dstop='docker stop'
-        alias dmysql='docker run -it --rm --net=sherbet-network --volumes-from mysql-server mysql-client mysql -h mysql-server'
-        alias dmysqldump='docker run -it --rm --net=sherbet-network --volumes-from mysql-server mysql-client mysqldump'
-        alias dc='docker-compose'
-
-### README files for each image
-
-There are README files for each image. They provide instructions on how to build, run and work with images individually.
 
 ### Docker Cheat Sheet
 
