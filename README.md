@@ -50,8 +50,23 @@ However, if you get any errors due to latencies, etc., it would be harder to tro
        $ docker-compose build ruby-1.9.3-p547  # the base image for the stallone image
        $ docker-compose build ruby-2.1.1       # the base image for the ottweb image
        $ docker-compose build ruby-2.2.2       # the base image for product-catalog image
+       $ docker-compose build product-catalog
+       $ docker-compose build stallone
+       $ docker-compose build ottweb
 
-Building images for the first time might take 10-15 minutes. Your code in `../ottweb`, `../stallone` and `../product-catalog` is not part of the images. It's just being mounted into containers when they get created. So, no need to rebuild any image, unless their respective Dockerfile was changed. Also, unless you delete all containers with `docker-compose down`, you don't need to spin them again. Just use `docker-compose stop` and `docker-compose start` for subsequent restarts of the apps in your Docker environment. Then attach to the logs with `docker-compose logs -f`.
+... then spin containers starting with mysql server and its dependency, dbstore:
+
+       $ docker-compose up db
+       # or in detached mode
+       $ docker-compose up -d db
+
+Start the applications one by one and watch them connect to the db container, create a new database and run migrations. Unless you started the db image in detached mode, you need to run the following commands in new terminal windows:
+
+       $ docker-compose up product-catalog
+       $ docker-compose up stallone
+       $ docker-compose up ottweb
+
+Building images and containers for the first time might take 15-20 minutes. Your code in `../ottweb`, `../stallone` and `../product-catalog` is not part of the images. It's just being mounted into containers when they get created. So, no need to rebuild any image, unless their respective Dockerfile was changed. Also, unless you delete all containers with `docker-compose down`, you don't need to spin them again. Just use `docker-compose stop` and `docker-compose start` for subsequent restarts of the apps in your Docker environment. Then attach to the logs with `docker-compose logs -f`.
 
 #### Default configuration
 
