@@ -31,5 +31,5 @@ EXPOSE 3002
 
 # Running bundle install again to catch up on any changes in Gemfile
 CMD bundle install && \
-    rake db:migrate && \
+    rake db:create db:migrate && \
     bin/rails s -p 3002 -b 0.0.0.0
