@@ -10,7 +10,6 @@ RUN git clone https://github.com/creationix/nvm.git ~/.nvm && cd ~/.nvm && git c
 RUN . ~/.nvm/nvm.sh && \
     nvm install $NODEJS_VERSION && \
     nvm alias default $NODEJS_VERSION && \
-    npm config set registry=https://artifactory.global.dish.com/artifactory/api/npm/npm-remote && \
     npm config set strict-ssl=false
 
 ENV APP_HOME /ottweb
