@@ -31,5 +31,6 @@ EXPOSE 3002
 
 # Running bundle install again to catch up on any changes in Gemfile
 CMD bundle install && \
-    rake db:create db:migrate && \
+    rake db:migrate 2>/dev/null || rake db:setup && \
+    rm -f tmp/pids/server.pid && \
     bin/rails s -p 3002 -b 0.0.0.0
