@@ -28,7 +28,7 @@ The `.env` file is in the `.gitignore` file, so it won't get exposed.
        # ~/workspace/ottweb
        # etc.
        $ cd ~/workspace
-       $ git clone https://github.com/sherbet/docker.git
+       $ git clone https://gitlab.int.slingtv.com/mkreyman/docker.git
        $ cd docker
 
 You could get all the applications up, from building images to running containers, by just running the following command:
